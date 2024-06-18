@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+  <h2>Dashboard</h2>
+  <p>Here you can view and manage your health data.</p>
+  <a class="btn btn-primary" href="{{ url_for('main.goals') }}">Set Goals</a>
+  <a class="btn btn-secondary" href="{{ url_for('main.reminders') }}">Set Reminders</a>
+  <!-- Hier kannst du Plots hinzufügen, um Daten zu visualisieren -->
+  <div id="chart-container">
+    <!-- Beispiel für eine Diagramm-Integration -->
+    <canvas id="healthChart"></canvas>
+  </div>
+  <script>
+    var ctx = document.getElementById('healthChart').getContext('2d');
+    var healthChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [{
+          label: 'Weight',
+          data: [65, 66, 67, 66, 65, 64],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }, {
+          label: 'Blood Pressure',
+          data: [120, 122, 121, 123, 124, 122],
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+{% endblock %}
+
